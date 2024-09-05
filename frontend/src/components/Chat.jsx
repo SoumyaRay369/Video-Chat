@@ -71,10 +71,10 @@ export const Chat = () => {
 
     navigator.mediaDevices.getUserMedia({ video: true, audio: true })
       .then(stream => {
-        const call = peer.call(remotePeerId, stream);
+        const reception = peer.call(remotePeerId, stream);
         console.log('Calling peer:', remotePeerId);
 
-        call.on('stream', function (remoteStream) {
+        reception.on('stream', function (remoteStream) {
           console.log('Received remote stream');
           if (videoRef2.current) {
             videoRef2.current.srcObject = remoteStream;
@@ -98,7 +98,7 @@ export const Chat = () => {
         <video ref={videoRef2} autoPlay className="border border-gray-400 rounded-xl w-1/2"></video>
       </div>
       <div className="flex flex-col gap-y-2">
-          <input onChange={(e) => setRemotePeerId(e.target.value)} type="text" className="p-4 text-white rounded-md bg-sky-500 border-none outline-none font-mono placeholder:italic placeholder:text-white" placeholder="Enter PeerId of Friend" />
+          <input onChange={(e) => setRemotePeerId(e.target.value)} type="text" className="p-3  text-white rounded-md bg-sky-500 border-none outline-none font-mono placeholder:italic placeholder:text-white" placeholder="Enter PeerId of Friend" />
           <button onClick={callPeer} className="p-4 text-white rounded-md bg-slate-500 hover:bg-black font-mono ">Call Peer</button>
       </div>
     </div>
